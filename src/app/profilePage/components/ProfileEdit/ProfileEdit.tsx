@@ -1,11 +1,11 @@
-import {Box, Button, IconButton, InputAdornment} from "@mui/material";
+import { Box, Button, IconButton, InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {ReactElement, useContext, useState} from "react";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { ReactElement, useContext, useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import UserContext, {UserContextType} from "../../../context/UserContext.tsx";
+import UserContext, { UserContextType } from "../../../context/UserContext.tsx";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -25,7 +25,7 @@ const schema = yup.object().shape({
 
 type ProfileEditProps = {
   onEdit: () => void;
-}
+};
 
 type ProfileEditData = {
   oldPassword: string;
@@ -33,7 +33,6 @@ type ProfileEditData = {
   name: string;
   email: string;
 };
-
 
 const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
   const { user, editUser } = useContext(UserContext) as UserContextType;
@@ -46,7 +45,9 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -58,23 +59,34 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
     },
   });
 
-  const onSubmit = (data: ProfileEditData) => {
-    if (data.oldPassword !== user?.password) {
+  const watchOldPassword = watch("oldPassword");
+  const watchPassword = watch("password");
+  const isFormValid = !errors.oldPassword && !errors.password
+
+  useEffect(() => {
+    if (watchOldPassword !== user?.password) {
       setError("oldPassword", { type: "manual", message: "Old password does not match." });
-    }
-    if (data.password === user?.password) {
-      setError("password", { type: "manual", message: "New password cannot be the same as the old password." });
+    } else {
+      clearErrors("oldPassword");
     }
 
-    if (!errors.oldPassword && !errors.password && user) {
+    if (watchPassword === user?.password) {
+      setError("password", { type: "manual", message: "New password cannot be the same as the old password." });
+    } else {
+      clearErrors("password");
+    }
+  }, [watchOldPassword, watchPassword, user?.password, setError, clearErrors]);
+
+  const onSubmit = (data: ProfileEditData) => {
+    if (isFormValid && user) {
       const payload = {
         id: user.id,
         name: data?.name,
         email: data?.email,
         password: data?.password,
-      }
+      };
       editUser(payload);
-      onEdit()
+      onEdit();
     }
   };
 
@@ -178,15 +190,15 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
         }}
       />
       <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
-        <Button type="submit" variant="outlined" color="error" onClick={onEdit}>
+        <Button type="button" variant="outlined" color="error" onClick={onEdit}>
           Cancel
         </Button>
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" disabled={!isFormValid}>
           Save Changes
         </Button>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default ProfileEdit;
