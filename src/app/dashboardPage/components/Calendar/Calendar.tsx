@@ -121,6 +121,7 @@ const Calendar = () => {
         </Box>
         <Button
           variant="contained"
+          size="large"
           onClick={(e) => handleOpenForm(e, INITIAL_DATE)}
         >
           Add Event
