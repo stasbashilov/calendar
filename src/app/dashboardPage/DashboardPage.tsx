@@ -1,14 +1,15 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Box } from "@mui/material";
+import Calendar from "./components/Calendar";
+import Header from "../components/Header/Header.tsx";
 
 const DashboardPage: React.FC = () => {
   return (
     <>
-      {" "}
-      <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
-        Login
-      </NavLink>
-      <h2>Dashboard Page</h2>
+      <Header title='Dashboard' />
+      <Box sx={{ padding: 2 }}>
+        <Calendar/>
+      </Box>
     </>
   );
 };

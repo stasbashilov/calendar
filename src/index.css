@@ -3,6 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
+  width: 100%;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -10,7 +11,10 @@
 
 body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 

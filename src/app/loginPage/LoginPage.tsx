@@ -1,17 +1,20 @@
 import React from "react";
-import { LoginForm } from "./components/LoginForm";
-import {NavLink} from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const LoginPage: React.FC = () => {
   return (
     <>
-      <NavLink
-        to="/dashboard"
-        className={({ isActive }) => (isActive ? "active" : "")}
-      >
-        Dashboard
-      </NavLink>
-      <LoginForm />
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100vw',
+        }}>
+        <Outlet />
+      </Box>
     </>
   );
 };
