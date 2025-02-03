@@ -72,23 +72,6 @@ const Calendar = (): ReactElement => {
   };
 
   useEffect(() => {
-    if (!searchQuery) return;
-
-    const foundEvent = events.find((event) =>
-      event.label.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-
-    if (foundEvent) {
-      const eventDate = DateTime.fromISO(foundEvent.date);
-
-      if (eventDate < currentDate.startOf("month")) {
-        prevMonth();
-      } else if (eventDate > currentDate.endOf("month")) {
-        nextMonth();
-      }
-    }
-  }, [searchQuery, events, currentDate]);
-  useEffect(() => {
     dispatch(getEvents())
   }, [dispatch]);
 
