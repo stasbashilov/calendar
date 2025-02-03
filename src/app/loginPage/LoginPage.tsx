@@ -1,8 +1,8 @@
-import React from "react";
+import {ReactElement} from "react";
 import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 
-const LoginPage: React.FC = () => {
+const LoginPage = (): ReactElement => {
   return (
     <>
       <Box

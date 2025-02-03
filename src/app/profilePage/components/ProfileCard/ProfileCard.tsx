@@ -1,14 +1,14 @@
 import {Box, IconButton, Paper, Typography} from "@mui/material";
 import CustomWidthTooltip from "../../../components/Tooltip";
 import EditIcon from "@mui/icons-material/Edit";
-import {useContext} from "react";
+import {ReactElement, useContext} from "react";
 import UserContext, {UserContextType} from "../../../context/UserContext.tsx";
 
 type ProfileCardProps = {
   onCancelEdit: () => void;
 }
 
-const ProfileCard = ({ onCancelEdit }: ProfileCardProps) => {
+const ProfileCard = ({ onCancelEdit }: ProfileCardProps): ReactElement => {
   const { user } = useContext(UserContext) as UserContextType;
 
   return (

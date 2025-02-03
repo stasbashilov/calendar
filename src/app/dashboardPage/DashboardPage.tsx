@@ -1,9 +1,9 @@
-import React from "react";
+import { ReactElement } from "react";
 import { Box } from "@mui/material";
 import Calendar from "./components/Calendar";
 import Header from "../components/Header/Header.tsx";
 
-const DashboardPage: React.FC = () => {
+const DashboardPage = (): ReactElement => {
   return (
     <>
       <Header title='Dashboard' />

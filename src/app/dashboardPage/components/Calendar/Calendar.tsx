@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {ReactElement, useEffect, useState} from "react";
 import { DateTime } from "luxon";
 import {Box, Button, Typography} from "@mui/material";
 import EventsList from "../EventList/EventList.tsx";
@@ -13,7 +13,7 @@ import WeekdaysRow from "../WeekDaysRow/WeekdaysRow.tsx";
 import CustomWidthTooltip from "../../../components/Tooltip";
 import {INITIAL_DATE, INITIAL_EVENT_ID} from "../../../constants/constants.ts";
 
-const Calendar = () => {
+const Calendar = (): ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [eventData, setEventData] = useState<EventType | null>(null);
   const [currentDate, setCurrentDate] = useState(DateTime.now());

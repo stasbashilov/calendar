@@ -1,7 +1,7 @@
 import {Box, Button, IconButton, InputAdornment} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {useContext, useState} from "react";
+import {ReactElement, useContext, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -27,7 +27,15 @@ type ProfileEditProps = {
   onEdit: () => void;
 }
 
-const ProfileEdit = ({ onEdit }: ProfileEditProps) => {
+type ProfileEditData = {
+  oldPassword: string;
+  password: string;
+  name: string;
+  email: string;
+};
+
+
+const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
   const { user, editUser } = useContext(UserContext) as UserContextType;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -50,7 +58,7 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps) => {
     },
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ProfileEditData) => {
     if (data.oldPassword !== user?.password) {
       setError("oldPassword", { type: "manual", message: "Old password does not match." });
     }

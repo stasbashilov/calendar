@@ -1,11 +1,12 @@
 import { EventType } from "../../../types/types.ts";
 import { Box, Typography } from "@mui/material";
+import { ReactElement } from "react";
 
 export type EventProps = {
   event: EventType;
 };
 
-const Event = ({ event }: EventProps) => (
+const Event = ({ event }: EventProps): ReactElement => (
   <Box
     sx={{
       display: "flex",

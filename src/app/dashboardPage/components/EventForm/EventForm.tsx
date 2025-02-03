@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {ReactElement, useEffect, useState} from "react";
 import { Box, Typography, Popover, Button, TextField } from "@mui/material";
 import { INITIAL_EVENT_ID } from "../../../constants/constants.ts";
 import { EventType } from '../../../types/types.ts';
@@ -11,7 +11,7 @@ interface EventFormProps {
   onDelete: (id: number) => void;
 }
 
-const EventForm: React.FC<EventFormProps> = ({ anchorEl, onClose, event, onSave, onDelete }) => {
+const EventForm = ({ anchorEl, onClose, event, onSave, onDelete }: EventFormProps): ReactElement => {
   const [eventData, setEventData] = useState<EventType>(
     event || { id: INITIAL_EVENT_ID, label: "", date: "", description: "" }
   );

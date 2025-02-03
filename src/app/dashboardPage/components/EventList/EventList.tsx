@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store/store.ts";
 import { setSearchQuery } from "../../../store/eventsSlice.ts";
 import { Box } from "@mui/material";
+import {ReactElement} from "react";
 
-const EventList = () => {
+const EventList = (): ReactElement => {
   const dispatch = useDispatch();
   const { events, searchQuery } = useSelector(
     (state: RootState) => state.events,
