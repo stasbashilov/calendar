@@ -6,9 +6,9 @@ import Header from "../components/Header/Header.tsx";
 const DashboardPage = (): ReactElement => {
   return (
     <>
-      <Header title='Dashboard' />
+      <Header title="Dashboard" />
       <Box sx={{ padding: 2 }}>
-        <Calendar/>
+        <Calendar />
       </Box>
     </>
   );

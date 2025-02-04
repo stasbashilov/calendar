@@ -1,4 +1,4 @@
-import {ReactElement} from "react";
+import { ReactElement } from "react";
 import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 
@@ -7,12 +7,13 @@ const LoginPage = (): ReactElement => {
     <>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100vw',
-        }}>
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100vw",
+        }}
+      >
         <Outlet />
       </Box>
     </>

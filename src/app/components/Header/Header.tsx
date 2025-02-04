@@ -1,6 +1,6 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import { useContext } from "react";

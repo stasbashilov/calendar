@@ -1,8 +1,8 @@
-import { Box}  from "@mui/material";
+import { Box } from "@mui/material";
 import { weekDays } from "../../../constants/constants.ts";
-import {ReactElement} from "react";
+import { ReactElement } from "react";
 
-const WeekdaysRow= (): ReactElement => {
+const WeekdaysRow = (): ReactElement => {
   return (
     <Box display="flex" justifyContent="space-between" width="100%" mb={1}>
       {weekDays.map((day) => (
@@ -11,7 +11,7 @@ const WeekdaysRow= (): ReactElement => {
         </Box>
       ))}
     </Box>
-  )
-}
+  );
+};
 
 export default WeekdaysRow;

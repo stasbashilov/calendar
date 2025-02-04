@@ -1,7 +1,7 @@
-import {ReactElement, useEffect, useState} from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Box, Typography, Popover, Button, TextField } from "@mui/material";
 import { INITIAL_EVENT_ID } from "../../../constants/constants.ts";
-import { EventType } from '../../../types/types.ts';
+import { EventType } from "../../../types/types.ts";
 
 interface EventFormProps {
   anchorEl: HTMLElement | null;
@@ -11,12 +11,22 @@ interface EventFormProps {
   onDelete: (id: number) => void;
 }
 
-const EventForm = ({ anchorEl, onClose, event, onSave, onDelete }: EventFormProps): ReactElement => {
+const EventForm = ({
+  anchorEl,
+  onClose,
+  event,
+  onSave,
+  onDelete,
+}: EventFormProps): ReactElement => {
   const [eventData, setEventData] = useState<EventType>(
-    event || { id: INITIAL_EVENT_ID, label: "", date: "", description: "" }
+    event || { id: INITIAL_EVENT_ID, label: "", date: "", description: "" },
   );
 
-  const isEventAvailable = Boolean(eventData?.id !== INITIAL_EVENT_ID && eventData?.label && eventData?.description);
+  const isEventAvailable = Boolean(
+    eventData?.id !== INITIAL_EVENT_ID &&
+      eventData?.label &&
+      eventData?.description,
+  );
 
   const handleChange = (key: keyof EventType, value: string) => {
     setEventData((prev) => ({ ...prev, [key]: value }));
@@ -44,7 +54,9 @@ const EventForm = ({ anchorEl, onClose, event, onSave, onDelete }: EventFormProp
       transformOrigin={{ vertical: "top", horizontal: "left" }}
     >
       <Box sx={{ p: 2, minWidth: 300 }}>
-        <Typography variant="h6">{isEventAvailable ? "Edit event" : "Add event"}</Typography>
+        <Typography variant="h6">
+          {isEventAvailable ? "Edit event" : "Add event"}
+        </Typography>
         <TextField
           fullWidth
           label="Title"
@@ -70,14 +82,20 @@ const EventForm = ({ anchorEl, onClose, event, onSave, onDelete }: EventFormProp
         />
         <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
           {isEventAvailable && (
-            <Box mr='auto'>
-              <Button variant='outlined' color='error' onClick={() => onDelete(eventData.id)}>Delete</Button>
+            <Box mr="auto">
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => onDelete(eventData.id)}
+              >
+                Delete
+              </Button>
             </Box>
           )}
           <Box>
             <Button onClick={onClose}>Cancel</Button>
             <Button variant="contained" sx={{ ml: 1 }} onClick={handleSave}>
-              {isEventAvailable ? 'Update' : 'Add'}
+              {isEventAvailable ? "Update" : "Add"}
             </Button>
           </Box>
         </Box>

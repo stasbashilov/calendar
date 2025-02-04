@@ -73,7 +73,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   const isUserUnique = (newUser: User) => {
     return !users.some(
       (existingUser) =>
-        existingUser.email === newUser.email || existingUser.id === newUser.id
+        existingUser.email === newUser.email || existingUser.id === newUser.id,
     );
   };
 
@@ -98,7 +98,16 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <UserContext.Provider
-      value={{ user, saveUser, clearUser, editUser, getUsers, addUser, logout, login }}
+      value={{
+        user,
+        saveUser,
+        clearUser,
+        editUser,
+        getUsers,
+        addUser,
+        logout,
+        login,
+      }}
     >
       {children}
     </UserContext.Provider>

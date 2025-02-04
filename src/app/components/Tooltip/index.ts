@@ -1,2 +1,2 @@
-import CustomWidthTooltip from './CustomWidthTooltip';
+import CustomWidthTooltip from "./CustomWidthTooltip";
 export default CustomWidthTooltip;

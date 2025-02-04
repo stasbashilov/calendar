@@ -1,12 +1,12 @@
-import {Box, IconButton, Paper, Typography} from "@mui/material";
+import { Box, IconButton, Paper, Typography } from "@mui/material";
 import CustomWidthTooltip from "../../../components/Tooltip";
 import EditIcon from "@mui/icons-material/Edit";
-import {ReactElement, useContext} from "react";
-import UserContext, {UserContextType} from "../../../context/UserContext.tsx";
+import { ReactElement, useContext } from "react";
+import UserContext, { UserContextType } from "../../../context/UserContext.tsx";
 
 type ProfileCardProps = {
   onCancelEdit: () => void;
-}
+};
 
 const ProfileCard = ({ onCancelEdit }: ProfileCardProps): ReactElement => {
   const { user } = useContext(UserContext) as UserContextType;
@@ -56,7 +56,7 @@ const ProfileCard = ({ onCancelEdit }: ProfileCardProps): ReactElement => {
         </Box>
       </Paper>
     </Box>
-  )
-}
+  );
+};
 
 export default ProfileCard;

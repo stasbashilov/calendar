@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,9 +11,9 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {NavLink, useNavigate} from "react-router-dom";
-import UserContext, { UserContextType} from "../../../context/UserContext.tsx";
-import {User} from "../../../types/types.ts";
+import { NavLink, useNavigate } from "react-router-dom";
+import UserContext, { UserContextType } from "../../../context/UserContext.tsx";
+import { User } from "../../../types/types.ts";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -44,7 +44,11 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: { name: string; email: string; password: string }) => {
+  const onSubmit = (data: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
     const newUser = {
       id: Date.now(),
       name: data.name,
@@ -53,7 +57,9 @@ const SignUp = () => {
     };
 
     const existingUsers = getUsers();
-    const isUserExists = existingUsers.some((user: User) => user.email === newUser.email);
+    const isUserExists = existingUsers.some(
+      (user: User) => user.email === newUser.email,
+    );
 
     if (isUserExists) {
       setError("email", {
@@ -110,7 +116,10 @@ const SignUp = () => {
             input: {
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                  <IconButton
+                    onClick={() => setShowPassword(!showPassword)}
+                    edge="end"
+                  >
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
@@ -129,7 +138,10 @@ const SignUp = () => {
             input: {
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowConfirmPassword(!showConfirmPassword)} edge="end">
+                  <IconButton
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    edge="end"
+                  >
                     {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>

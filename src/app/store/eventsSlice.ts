@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { EventType } from "../types/types.ts";
 
 interface EventsState {
@@ -11,11 +11,12 @@ const initialState: EventsState = {
   searchQuery: "",
 };
 
-export const getEvents = () => (dispatch: any) => {
-  const storedEvents = localStorage.getItem("events");
-  const events = storedEvents ? JSON.parse(storedEvents) : [];
-  dispatch(eventsSlice.actions.setEvents(events));
-};
+export const getEvents =
+  () => (dispatch: Dispatch<PayloadAction<EventType[]>>) => {
+    const storedEvents = localStorage.getItem("events");
+    const events = storedEvents ? JSON.parse(storedEvents) : [];
+    dispatch(eventsSlice.actions.setEvents(events));
+  };
 
 const eventsSlice = createSlice({
   name: "events",
@@ -32,12 +33,14 @@ const eventsSlice = createSlice({
       localStorage.setItem("events", JSON.stringify(state.events));
     },
     deleteEvent: (state: EventsState, action: PayloadAction<EventType>) => {
-      state.events = state.events.filter(event => event.id !== action.payload.id);
+      state.events = state.events.filter(
+        (event) => event.id !== action.payload.id,
+      );
       localStorage.setItem("events", JSON.stringify(state.events));
     },
     editEvent: (state: EventsState, action: PayloadAction<EventType>) => {
       const updatedEventIndex = state.events.findIndex(
-        (event) => event.id === action.payload.id
+        (event) => event.id === action.payload.id,
       );
       if (updatedEventIndex !== -1) {
         state.events[updatedEventIndex] = action.payload;
@@ -47,5 +50,6 @@ const eventsSlice = createSlice({
   },
 });
 
-export const { addEvent, setSearchQuery, editEvent, deleteEvent } = eventsSlice.actions;
+export const { addEvent, setSearchQuery, editEvent, deleteEvent } =
+  eventsSlice.actions;
 export default eventsSlice.reducer;

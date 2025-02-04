@@ -5,7 +5,10 @@ interface CustomTooltipProps extends TooltipProps {
   maxWidth?: string | number;
 }
 
-const CustomWidthTooltip: React.FC<CustomTooltipProps> = ({ maxWidth = 500, ...props }) => {
+const CustomWidthTooltip: React.FC<CustomTooltipProps> = ({
+  maxWidth = 500,
+  ...props
+}) => {
   return (
     <MuiTooltip
       {...props}

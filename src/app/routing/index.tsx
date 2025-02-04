@@ -1,21 +1,10 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "../loginPage/LoginPage.tsx";
 import DashboardPage from "../dashboardPage/DashboardPage.tsx";
 import { SignIn } from "../loginPage/components/SignIn";
 import { SignUp } from "../loginPage/components/SignUp";
-import {useContext} from "react";
-import UserContext, { UserContextType } from "../context/UserContext.tsx";
 import ProfilePage from "../profilePage/ProfilePage.tsx";
-
-const PrivateRoute = ({ element }: { element: JSX.Element }) => {
-  const { user } = useContext(UserContext) as UserContextType;
-
-  if (!user) {
-    return <Navigate to="/" replace/>;
-  }
-
-  return element;
-};
+import PrivateRoute from "./PrivatRoute.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,19 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <PrivateRoute
-        element={<DashboardPage />}
-      />
-    ),
+    element: <PrivateRoute element={<DashboardPage />} />,
   },
   {
     path: "/profile",
-    element: (
-      <PrivateRoute
-        element={<ProfilePage />}
-      />
-    ),
+    element: <PrivateRoute element={<ProfilePage />} />,
   },
 ]);
 

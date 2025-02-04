@@ -1,25 +1,37 @@
-import React, {ReactElement, useEffect, useState} from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { DateTime } from "luxon";
-import {Box, Button, Typography} from "@mui/material";
+import { Action } from "redux";
+import { Box, Button, Typography } from "@mui/material";
 import EventsList from "../EventList/EventList.tsx";
 import Event from "../Event/Event.tsx";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store.ts";
 import { EventType } from "../../../types/types.ts";
-import {addEvent, editEvent, getEvents, deleteEvent} from "../../../store/eventsSlice.ts";
+import {
+  addEvent,
+  editEvent,
+  getEvents,
+  deleteEvent,
+} from "../../../store/eventsSlice.ts";
 import { EventForm } from "../EventForm";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import WeekdaysRow from "../WeekDaysRow/WeekdaysRow.tsx";
 import CustomWidthTooltip from "../../../components/Tooltip";
-import {INITIAL_DATE, INITIAL_EVENT_ID} from "../../../constants/constants.ts";
+import {
+  INITIAL_DATE,
+  INITIAL_EVENT_ID,
+} from "../../../constants/constants.ts";
 
 const Calendar = (): ReactElement => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [eventData, setEventData] = useState<EventType | null>(null);
   const [currentDate, setCurrentDate] = useState(DateTime.now());
 
-  const { events, searchQuery } = useSelector((state: RootState) => state.events);
-  const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
+  const { events, searchQuery } = useSelector(
+    (state: RootState) => state.events,
+  );
+  const dispatch =
+    useDispatch<ThunkDispatch<RootState, undefined, Action<string>>>();
 
   const startOfMonth = currentDate.startOf("month");
   const daysInMonth = currentDate.daysInMonth;
@@ -48,7 +60,9 @@ const Calendar = (): ReactElement => {
     event?: EventType,
   ) => {
     setAnchorEl(e.currentTarget);
-    setEventData(event || { id: INITIAL_EVENT_ID, label: "", date, description: "" });
+    setEventData(
+      event || { id: INITIAL_EVENT_ID, label: "", date, description: "" },
+    );
   };
 
   const handleCloseForm = () => {
@@ -64,7 +78,7 @@ const Calendar = (): ReactElement => {
     handleCloseForm();
   };
   const handleDeleteEvent = (id: number) => {
-    const eventToDelete = events.find(event => event.id === id);
+    const eventToDelete = events.find((event) => event.id === id);
     if (eventToDelete) {
       dispatch(deleteEvent(eventToDelete));
     }
@@ -72,7 +86,7 @@ const Calendar = (): ReactElement => {
   };
 
   useEffect(() => {
-    dispatch(getEvents())
+    dispatch(getEvents());
   }, [dispatch]);
 
   return (
@@ -111,8 +125,8 @@ const Calendar = (): ReactElement => {
         </Button>
         <EventsList />
       </Box>
-      <Box sx={{ width:"100%", overflowX: "auto" }}>
-        <Box sx={{ flex: 1, minWidth: "1408px" }} >
+      <Box sx={{ width: "100%", overflowX: "auto" }}>
+        <Box sx={{ flex: 1, minWidth: "1408px" }}>
           <WeekdaysRow />
           <Box display="flex" flexWrap="wrap" gap={0.3}>
             {emptyDays.map((_, i) => (
@@ -121,7 +135,12 @@ const Calendar = (): ReactElement => {
             {daysArray.map((day) => {
               const event = getEvent(day);
               return (
-                <CustomWidthTooltip maxWidth={'70px'} title={event ? 'Edit Event' : 'Add Event'} placement="right-start" key={day.toISODate()}>
+                <CustomWidthTooltip
+                  maxWidth={"70px"}
+                  title={event ? "Edit Event" : "Add Event"}
+                  placement="right-start"
+                  key={day.toISODate()}
+                >
                   <Box
                     sx={{
                       backgroundColor: getBackgroundColor(

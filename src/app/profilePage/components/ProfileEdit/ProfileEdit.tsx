@@ -10,9 +10,7 @@ import UserContext, { UserContextType } from "../../../context/UserContext.tsx";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  oldPassword: yup
-    .string()
-    .required("Old password is required"),
+  oldPassword: yup.string().required("Old password is required"),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
@@ -61,17 +59,23 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
 
   const watchOldPassword = watch("oldPassword");
   const watchPassword = watch("password");
-  const isFormValid = !errors.oldPassword && !errors.password
+  const isFormValid = !errors.oldPassword && !errors.password;
 
   useEffect(() => {
     if (watchOldPassword !== user?.password) {
-      setError("oldPassword", { type: "manual", message: "Old password does not match." });
+      setError("oldPassword", {
+        type: "manual",
+        message: "Old password does not match.",
+      });
     } else {
       clearErrors("oldPassword");
     }
 
     if (watchPassword === user?.password) {
-      setError("password", { type: "manual", message: "New password cannot be the same as the old password." });
+      setError("password", {
+        type: "manual",
+        message: "New password cannot be the same as the old password.",
+      });
     } else {
       clearErrors("password");
     }
@@ -177,9 +181,7 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
-                  onClick={() =>
-                    setShowConfirmPassword(!showConfirmPassword)
-                  }
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   edge="end"
                 >
                   {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
@@ -189,11 +191,21 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
           },
         }}
       />
-      <Box display='flex' flexDirection='row' alignItems='center' justifyContent='space-between'>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Button type="button" variant="outlined" color="error" onClick={onEdit}>
           Cancel
         </Button>
-        <Button type="submit" variant="contained" color="primary" disabled={!isFormValid}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={!isFormValid}
+        >
           Save Changes
         </Button>
       </Box>
