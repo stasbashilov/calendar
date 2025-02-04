@@ -62,7 +62,7 @@ const ProfileEdit = ({ onEdit }: ProfileEditProps): ReactElement => {
   const isFormValid = !errors.oldPassword && !errors.password;
 
   useEffect(() => {
-    if (watchOldPassword !== user?.password) {
+    if (watchOldPassword && watchOldPassword !== user?.password) {
       setError("oldPassword", {
         type: "manual",
         message: "Old password does not match.",
